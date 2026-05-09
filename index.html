@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Materi Dasar Kalkulus</title>
+    <title>Materi Dasar Kalkulus Lengkap</title>
+    
+    <!-- Konfigurasi dan Pemanggilan MathJax untuk merender rumus matematika -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
     <style>
         /* CSS: Desain dan Tata Letak */
         body {
@@ -24,6 +35,9 @@
             display: flex;
             justify-content: center;
             background-color: #34495e;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         nav button {
             background: none;
@@ -38,7 +52,7 @@
             background-color: #2980b9;
         }
         main {
-            max-width: 800px;
+            max-width: 850px;
             margin: 2rem auto;
             padding: 2rem;
             background: white;
@@ -47,27 +61,62 @@
         }
         .tab-content {
             display: none;
+            animation: fadeIn 0.5s;
         }
         .tab-content.active {
             display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         h2 {
             color: #2c3e50;
             border-bottom: 2px solid #eee;
             padding-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        h3 {
+            color: #2980b9;
+            margin-top: 1.5rem;
         }
         .formula-box {
             background-color: #e8f4f8;
             padding: 1rem;
             border-left: 4px solid #3498db;
             margin: 1rem 0;
-            font-family: monospace;
-            font-size: 1.2rem;
+            overflow-x: auto;
+        }
+        .exercise-box {
+            background-color: #fff9e6;
+            padding: 1.5rem;
+            border: 1px solid #f1c40f;
+            border-radius: 5px;
+            margin-top: 2rem;
+        }
+        details {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+        summary {
+            font-weight: bold;
+            color: #27ae60;
+            outline: none;
+        }
+        .solution {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #ccc;
         }
         footer {
             text-align: center;
             padding: 1rem;
             margin-top: 2rem;
+            background-color: #ecf0f1;
             color: #7f8c8d;
         }
     </style>
@@ -76,54 +125,201 @@
 
     <header>
         <h1>Portal Pembelajaran Kalkulus Dasar</h1>
-        <p>Memahami Limit, Turunan, dan Integral secara Intuitif</p>
+        <p>Panduan Lengkap Limit, Turunan, dan Integral beserta Latihan Mandiri</p>
     </header>
 
     <nav>
-        <button class="tab-link active" onclick="openTab('limit')">Limit</button>
-        <button class="tab-link" onclick="openTab('turunan')">Turunan</button>
-        <button class="tab-link" onclick="openTab('integral')">Integral</button>
+        <button class="tab-link active" onclick="openTab(event, 'limit')">Limit</button>
+        <button class="tab-link" onclick="openTab(event, 'turunan')">Turunan</button>
+        <button class="tab-link" onclick="openTab(event, 'integral')">Integral</button>
     </nav>
 
     <main>
-        <!-- Konten Limit -->
+        <!-- ==================== KONTEN LIMIT ==================== -->
         <section id="limit" class="tab-content active">
-            <h2>Konsep Limit</h2>
-            <p>Limit menjelaskan nilai yang dihampiri oleh suatu fungsi ketika variabel inputnya mendekati suatu nilai tertentu. Ini adalah fondasi dari seluruh kalkulus.</p>
+            <h2>Konsep Dasar Limit</h2>
+            <p>Limit merupakan nilai yang dihampiri oleh suatu fungsi ketika variabel inputnya mendekati suatu titik tertentu. Secara matematis, ditulis sebagai:</p>
             <div class="formula-box">
-                lim (x → c) f(x) = L
+                $$ \lim_{x \to c} f(x) = L $$
             </div>
-            <p>Bisa dibaca sebagai: "Limit dari fungsi f(x) saat x mendekati c adalah L." Konsep ini sangat penting untuk mendefinisikan kontinuitas dan turunan.</p>
+            <p>Ini berarti jika $x$ dibuat sangat dekat dengan $c$ (tetapi $x \neq c$), maka nilai $f(x)$ akan sangat dekat dengan $L$.</p>
+
+            <h3>Sifat-Sifat Limit</h3>
+            <p>Misalkan $\lim_{x \to c} f(x) = L$ dan $\lim_{x \to c} g(x) = M$, serta $k$ adalah konstanta:</p>
+            <ul>
+                <li><strong>Penjumlahan/Pengurangan:</strong> $\lim_{x \to c} [f(x) \pm g(x)] = L \pm M$</li>
+                <li><strong>Perkalian Konstanta:</strong> $\lim_{x \to c} [k \cdot f(x)] = k \cdot L$</li>
+                <li><strong>Perkalian Fungsi:</strong> $\lim_{x \to c} [f(x) \cdot g(x)] = L \cdot M$</li>
+                <li><strong>Pembagian:</strong> $\lim_{x \to c} \frac{f(x)}{g(x)} = \frac{L}{M}$, dengan syarat $M \neq 0$</li>
+            </ul>
+
+            <h3>Teknik Penyelesaian Limit Aljabar</h3>
+            <ol>
+                <li><strong>Substitusi Langsung:</strong> Masukkan nilai $c$ ke dalam fungsi. Jika hasilnya bilangan real, itulah jawabannya.</li>
+                <li><strong>Pemfaktoran:</strong> Digunakan jika substitusi menghasilkan bentuk tak tentu $\frac{0}{0}$. Faktorkan pembilang dan/atau penyebut, lalu coret faktor yang sama.</li>
+                <li><strong>Perkalian Akar Sekawan:</strong> Digunakan jika fungsi memuat bentuk akar dan menghasilkan $\frac{0}{0}$.</li>
+            </ol>
+
+            <div class="exercise-box">
+                <h3>Latihan Mandiri: Limit</h3>
+                <p>Cobalah selesaikan soal-soal berikut. Klik "Lihat Pembahasan" untuk mencocokkan jawaban Anda.</p>
+                
+                <p><strong>Soal 1:</strong> Hitunglah $\lim_{x \to 2} (3x^2 - 4x + 5)$.</p>
+                <details>
+                    <summary>Lihat Pembahasan Soal 1</summary>
+                    <div class="solution">
+                        <p>Gunakan metode <strong>Substitusi Langsung</strong>:</p>
+                        $$ \lim_{x \to 2} (3x^2 - 4x + 5) = 3(2)^2 - 4(2) + 5 $$
+                        $$ = 3(4) - 8 + 5 = 12 - 8 + 5 = 9 $$
+                    </div>
+                </details>
+
+                <p><strong>Soal 2:</strong> Tentukan nilai $\lim_{x \to 4} \frac{\sqrt{x} - 2}{x - 4}$.</p>
+                <details>
+                    <summary>Lihat Pembahasan Soal 2</summary>
+                    <div class="solution">
+                        <p>Jika disubstitusi langsung hasilnya $\frac{0}{0}$. Kita gunakan metode <strong>Pemfaktoran</strong> pada penyebut:</p>
+                        $$ \lim_{x \to 4} \frac{\sqrt{x} - 2}{(\sqrt{x} - 2)(\sqrt{x} + 2)} $$
+                        <p>Coret $(\sqrt{x} - 2)$ di pembilang dan penyebut:</p>
+                        $$ = \lim_{x \to 4} \frac{1}{\sqrt{x} + 2} = \frac{1}{\sqrt{4} + 2} = \frac{1}{2 + 2} = \frac{1}{4} $$
+                    </div>
+                </details>
+
+                <p><strong>Soal 3:</strong> Evaluasi limit tak hingga: $\lim_{x \to \infty} \frac{4x^3 - 2x + 1}{2x^3 + 5}$.</p>
+                <details>
+                    <summary>Lihat Pembahasan Soal 3</summary>
+                    <div class="solution">
+                        <p>Untuk limit tak hingga pada bentuk rasional, bagi pembilang dan penyebut dengan pangkat tertinggi dari $x$ (dalam hal ini $x^3$), atau lihat koefisien pangkat tertingginya karena derajat pembilang dan penyebut sama:</p>
+                        $$ \lim_{x \to \infty} \frac{4x^3 - 2x + 1}{2x^3 + 5} = \frac{4}{2} = 2 $$
+                    </div>
+                </details>
+            </div>
         </section>
 
-        <!-- Konten Turunan -->
+        <!-- ==================== KONTEN TURUNAN ==================== -->
         <section id="turunan" class="tab-content">
-            <h2>Turunan (Derivatif)</h2>
-            <p>Turunan mengukur seberapa cepat nilai fungsi berubah terhadap perubahan variabel input. Secara geometris, turunan pada suatu titik mewakili gradien (kemiringan) dari garis singgung kurva di titik tersebut.</p>
+            <h2>Konsep Dasar Turunan</h2>
+            <p>Turunan (derivatif) mengukur laju perubahan sesaat dari suatu fungsi. Geometrisnya, turunan merepresentasikan gradien (kemiringan) garis singgung kurva di suatu titik. Definisi formalnya menggunakan limit:</p>
             <div class="formula-box">
-                f'(x) = lim (h → 0) [f(x + h) - f(x)] / h
+                $$ f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} $$
             </div>
-            <p>Turunan banyak digunakan untuk mencari nilai maksimum, minimum, dan laju perubahan sesaat dalam fisika maupun ekonomi.</p>
+
+            <h3>Aturan Dasar Pencarian Turunan</h3>
+            <ul>
+                <li><strong>Aturan Pangkat:</strong> Jika $f(x) = x^n$, maka $f'(x) = n \cdot x^{n-1}$.</li>
+                <li><strong>Aturan Kelipatan Konstanta:</strong> Jika $f(x) = k \cdot u(x)$, maka $f'(x) = k \cdot u'(x)$.</li>
+                <li><strong>Aturan Penjumlahan:</strong> $[u(x) \pm v(x)]' = u'(x) \pm v'(x)$.</li>
+                <li><strong>Aturan Perkalian (Product Rule):</strong> $[u \cdot v]' = u'v + uv'$.</li>
+                <li><strong>Aturan Pembagian (Quotient Rule):</strong> $\left[\frac{u}{v}\right]' = \frac{u'v - uv'}{v^2}$.</li>
+                <li><strong>Aturan Rantai (Chain Rule):</strong> $[f(g(x))]' = f'(g(x)) \cdot g'(x)$.</li>
+            </ul>
+
+            <div class="exercise-box">
+                <h3>Latihan Mandiri: Turunan</h3>
+                <p>Selesaikan soal-soal derivatif di bawah ini.</p>
+                
+                <p><strong>Soal 1:</strong> Tentukan turunan pertama $f'(x)$ jika $f(x) = x^3 \sin x$.</p>
+                <details>
+                    <summary>Lihat Pembahasan Soal 1</summary>
+                    <div class="solution">
+                        <p>Gunakan <strong>Aturan Perkalian</strong> $(u \cdot v)' = u'v + uv'$.<br>
+                        Misal $u = x^3 \implies u' = 3x^2$<br>
+                        Misal $v = \sin x \implies v' = \cos x$</p>
+                        $$ f'(x) = (3x^2)(\sin x) + (x^3)(\cos x) $$
+                        $$ f'(x) = 3x^2 \sin x + x^3 \cos x $$
+                    </div>
+                </details>
+
+                <p><strong>Soal 2:</strong> Carilah turunan pertama dari fungsi rasional $g(x) = \frac{2x - 1}{x + 3}$.</p>
+                <details>
+                    <summary>Lihat Pembahasan Soal 2</summary>
+                    <div class="solution">
+                        <p>Gunakan <strong>Aturan Pembagian</strong> $(\frac{u}{v})' = \frac{u'v - uv'}{v^2}$.<br>
+                        $u = 2x - 1 \implies u' = 2$<br>
+                        $v = x + 3 \implies v' = 1$</p>
+                        $$ g'(x) = \frac{(2)(x + 3) - (2x - 1)(1)}{(x + 3)^2} $$
+                        $$ g'(x) = \frac{2x + 6 - 2x + 1}{(x + 3)^2} = \frac{7}{(x + 3)^2} $$
+                    </div>
+                </details>
+
+                <p><strong>Soal 3:</strong> Tentukan gradien garis singgung kurva $y = x^2 - 4x + 3$ pada titik dengan absis $x = 1$.</p>
+                <details>
+                    <summary>Lihat Pembahasan Soal 3</summary>
+                    <div class="solution">
+                        <p>Gradien garis singgung $(m)$ adalah nilai turunan pertama pada titik tersebut.</p>
+                        $$ y' = 2x - 4 $$
+                        <p>Substitusi $x = 1$ ke dalam turunan:</p>
+                        $$ m = 2(1) - 4 = 2 - 4 = -2 $$
+                        <p>Jadi, gradien garis singgungnya adalah -2.</p>
+                    </div>
+                </details>
+            </div>
         </section>
 
-        <!-- Konten Integral -->
+        <!-- ==================== KONTEN INTEGRAL ==================== -->
         <section id="integral" class="tab-content">
-            <h2>Integral</h2>
-            <p>Integral adalah kebalikan dari turunan (anti-turunan) dan sering digunakan untuk menghitung luas area di bawah sebuah kurva pada grafik koordinat.</p>
-            <div class="formula-box">
-                ∫ f(x) dx = F(x) + C
+            <h2>Konsep Dasar Integral</h2>
+            <p>Integral adalah operasi kebalikan dari turunan (anti-turunan). Terdapat dua jenis utama:</p>
+            <ol>
+                <li><strong>Integral Tak Tentu:</strong> Menghasilkan keluarga fungsi. Mengandung konstanta integrasi $C$.
+                    <div class="formula-box">$$ \int f(x) dx = F(x) + C $$</div>
+                </li>
+                <li><strong>Integral Tentu:</strong> Memiliki batas atas dan batas bawah, digunakan untuk menghitung luas daerah. Berdasarkan Teorema Dasar Kalkulus:
+                    <div class="formula-box">$$ \int_{a}^{b} f(x) dx = F(b) - F(a) $$</div>
+                </li>
+            </ol>
+
+            <h3>Rumus Dasar Integral Aljabar</h3>
+            <p>$$ \int x^n dx = \frac{1}{n+1} x^{n+1} + C \quad \text{untuk} \quad n \neq -1 $$</p>
+
+            <div class="exercise-box">
+                <h3>Latihan Mandiri: Integral</h3>
+                <p>Kerjakan soal integral berikut dan periksa hasilnya.</p>
+                
+                <p><strong>Soal 1:</strong> Selesaikan integral tak tentu berikut: $\int \sqrt{x} dx$.</p>
+                <details>
+                    <summary>Lihat Pembahasan Soal 1</summary>
+                    <div class="solution">
+                        <p>Ubah bentuk akar menjadi pangkat pecahan: $\sqrt{x} = x^{1/2}$.</p>
+                        $$ \int x^{1/2} dx = \frac{1}{\frac{1}{2} + 1} x^{\frac{1}{2} + 1} + C $$
+                        $$ = \frac{1}{\frac{3}{2}} x^{3/2} + C = \frac{2}{3} x \sqrt{x} + C $$
+                    </div>
+                </details>
+
+                <p><strong>Soal 2:</strong> Gunakan metode substitusi untuk menyelesaikan $\int 2x(x^2 + 5)^4 dx$.</p>
+                <details>
+                    <summary>Lihat Pembahasan Soal 2</summary>
+                    <div class="solution">
+                        <p>Misalkan $u = x^2 + 5$. Maka turunan $u$ terhadap $x$ adalah $\frac{du}{dx} = 2x$, sehingga $du = 2x \ dx$.<br>
+                        Substitusikan ke dalam integral:</p>
+                        $$ \int (x^2 + 5)^4 (2x \ dx) = \int u^4 du $$
+                        $$ = \frac{1}{5} u^5 + C $$
+                        <p>Kembalikan nilai $u$ ke bentuk $x$:</p>
+                        $$ = \frac{1}{5} (x^2 + 5)^5 + C $$
+                    </div>
+                </details>
+
+                <p><strong>Soal 3:</strong> Hitung luas daerah yang dibatasi oleh kurva $y = x^2$, sumbu $x$, garis $x = 0$, dan garis $x = 2$.</p>
+                <details>
+                    <summary>Lihat Pembahasan Soal 3</summary>
+                    <div class="solution">
+                        <p>Luas daerah dapat dihitung menggunakan integral tentu dari batas $a=0$ hingga $b=2$:</p>
+                        $$ \int_{0}^{2} x^2 dx = \left[ \frac{1}{3} x^3 \right]_{0}^{2} $$
+                        $$ = \left( \frac{1}{3}(2)^3 \right) - \left( \frac{1}{3}(0)^3 \right) $$
+                        $$ = \frac{8}{3} - 0 = \frac{8}{3} \text{ satuan luas} $$
+                    </div>
+                </details>
             </div>
-            <p>Integral Tentu digunakan untuk menghitung luas area yang dibatasi oleh interval [a, b], yang merupakan pilar penting dalam menyelesaikan persoalan terkait akumulasi suatu kuantitas.</p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Materi Kalkulus. Dibuat dengan HTML, CSS, & JS.</p>
+        <p>&copy; 2026 Portal Kalkulus Interaktif. Dibuat dengan HTML, CSS, & JavaScript.</p>
     </footer>
 
     <!-- JavaScript: Logika Navigasi Tab -->
     <script>
-        function openTab(tabName) {
+        function openTab(evt, tabName) {
             // Sembunyikan semua tab content
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => {
@@ -140,7 +336,7 @@
             document.getElementById(tabName).classList.add('active');
             
             // Tandai tombol yang diklik sebagai aktif
-            event.currentTarget.classList.add('active');
+            evt.currentTarget.classList.add('active');
         }
     </script>
 </body>
