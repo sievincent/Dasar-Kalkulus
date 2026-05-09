@@ -3,20 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Materi & Aplikasi Dasar Kalkulus</title>
+    <title>Materi & Bank Soal Kalkulus</title>
     
-    <!-- Konfigurasi dan Pemanggilan MathJax untuk merender rumus matematika -->
     <script>
       MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        }
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
       };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
-        /* CSS: Desain dan Tata Letak */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -33,26 +29,28 @@
         }
         nav {
             display: flex;
-            justify-content: center;
             background-color: #34495e;
             position: sticky;
             top: 0;
             z-index: 100;
+            overflow-x: auto;
+            white-space: nowrap;
         }
         nav button {
             background: none;
             border: none;
             color: white;
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: background-color 0.3s;
+            flex-shrink: 0;
         }
         nav button:hover, nav button.active {
             background-color: #2980b9;
         }
         main {
-            max-width: 850px;
+            max-width: 900px;
             margin: 2rem auto;
             padding: 2rem;
             background: white;
@@ -61,222 +59,280 @@
         }
         .tab-content {
             display: none;
-            animation: fadeIn 0.5s;
+            animation: fadeIn 0.4s;
         }
         .tab-content.active {
             display: block;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 0.5rem;
-            margin-top: 1.5rem;
-        }
-        h3 {
-            color: #2980b9;
-            margin-top: 1.5rem;
-            border-left: 4px solid #2980b9;
-            padding-left: 0.5rem;
-        }
-        .formula-box {
-            background-color: #e8f4f8;
-            padding: 1rem;
-            border-left: 4px solid #3498db;
-            margin: 1rem 0;
-            overflow-x: auto;
-        }
-        .app-box {
-            background-color: #f0fdf4;
-            padding: 1rem;
-            border-left: 4px solid #27ae60;
-            margin: 1rem 0;
-        }
-        .exercise-box {
-            background-color: #fff9e6;
-            padding: 1.5rem;
-            border: 1px solid #f1c40f;
-            border-radius: 5px;
-            margin-top: 2rem;
-        }
-        details {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            padding: 0.5rem 1rem;
-            margin-top: 1rem;
-            cursor: pointer;
-        }
-        summary {
-            font-weight: bold;
-            color: #d35400;
-            outline: none;
-        }
-        .solution {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px dashed #ccc;
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; margin-top: 1.5rem; }
+        h3 { color: #2980b9; margin-top: 1.5rem; border-left: 4px solid #2980b9; padding-left: 0.5rem; }
+        .formula-box { background-color: #e8f4f8; padding: 1rem; border-left: 4px solid #3498db; margin: 1rem 0; overflow-x: auto; }
+        .exercise-box { background-color: #fff9e6; padding: 1.5rem; border: 1px solid #f1c40f; border-radius: 5px; margin-top: 1.5rem; }
+        .bank-soal-box { background-color: #f9f9f9; padding: 1.5rem; border: 1px solid #ddd; border-radius: 5px; }
+        .soal-item { margin-bottom: 1.5rem; }
+        details { background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px; padding: 0.5rem 1rem; margin-top: 0.5rem; cursor: pointer; }
+        summary { font-weight: bold; color: #27ae60; outline: none; }
+        .solution { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #ccc; overflow-x: auto;}
     </style>
 </head>
 <body>
 
     <header>
         <h1>Portal Pembelajaran Kalkulus</h1>
-        <p>Konsep Dasar, Aplikasi Terapan, dan Latihan Mandiri</p>
+        <p>Limit, Turunan, Integral beserta Aplikasinya</p>
     </header>
 
     <nav>
-        <button class="tab-link active" onclick="openTab(event, 'limit')">Limit</button>
-        <button class="tab-link" onclick="openTab(event, 'turunan')">Turunan</button>
-        <button class="tab-link" onclick="openTab(event, 'integral')">Integral</button>
+        <button class="tab-link active" onclick="openTab(event, 'limit')">1. Limit</button>
+        <button class="tab-link" onclick="openTab(event, 'app-limit')">2. Aplikasi Limit</button>
+        <button class="tab-link" onclick="openTab(event, 'turunan')">3. Turunan</button>
+        <button class="tab-link" onclick="openTab(event, 'app-turunan')">4. Aplikasi Turunan</button>
+        <button class="tab-link" onclick="openTab(event, 'integral')">5. Integral</button>
+        <button class="tab-link" onclick="openTab(event, 'app-integral')">6. Aplikasi Integral</button>
+        <button class="tab-link" onclick="openTab(event, 'bank-soal')">7. Bank Soal</button>
     </nav>
 
     <main>
-        <!-- ==================== KONTEN LIMIT ==================== -->
+        <!-- ==================== 1. LIMIT ==================== -->
         <section id="limit" class="tab-content active">
-            <h2>Konsep Dasar Limit</h2>
-            <p>Limit menjelaskan perilaku suatu fungsi saat variabel independennya mendekati suatu titik tertentu.</p>
-            <div class="formula-box">
-                $$ \lim_{x \to c} f(x) = L $$
-            </div>
-
-            <!-- SUB-BAB APLIKASI LIMIT -->
-            <h3>Aplikasi Limit</h3>
-            <div class="app-box">
-                <p><strong>1. Kontinuitas Fungsi:</strong> Sebuah fungsi dikatakan kontinu di titik $x = c$ jika nilai limitnya sama dengan nilai fungsinya. Syaratnya: $\lim_{x \to c} f(x) = f(c)$. Konsep ini sangat penting untuk memastikan tidak ada "lubang" atau "loncatan" pada kurva.</p>
-                <p><strong>2. Menentukan Asimtot:</strong> Limit di tak hingga digunakan untuk menemukan asimtot datar (garis horizontal yang didekati kurva), sedangkan limit menuju titik diskontinuitas digunakan untuk menemukan asimtot tegak.</p>
-            </div>
-
+            <h2>Bab 1: Konsep Dasar Limit</h2>
+            <p>Limit adalah landasan utama kalkulus yang menganalisis perilaku fungsi saat mendekati titik tertentu.</p>
+            <div class="formula-box">$$ \lim_{x \to c} f(x) = L $$</div>
+            
             <div class="exercise-box">
-                <h3>Latihan Mandiri: Limit & Aplikasinya</h3>
+                <h3>Contoh Soal & Pembahasan Limit</h3>
                 
-                <p><strong>Soal 1:</strong> Hitunglah $\lim_{x \to 3} \frac{x^2 - 9}{x - 3}$.</p>
-                <details>
-                    <summary>Lihat Pembahasan Soal 1</summary>
-                    <div class="solution">
-                        <p>Faktorkan pembilang untuk menghindari bentuk $\frac{0}{0}$:</p>
-                        $$ \lim_{x \to 3} \frac{(x-3)(x+3)}{x-3} = \lim_{x \to 3} (x+3) = 3 + 3 = 6 $$
-                    </div>
-                </details>
-
-                <p><strong>Soal 2 (Aplikasi):</strong> Tentukan persamaan asimtot datar dari fungsi $f(x) = \frac{6x^2 + 5x - 1}{2x^2 - 3}$.</p>
-                <details>
-                    <summary>Lihat Pembahasan Soal 2</summary>
-                    <div class="solution">
-                        <p>Asimtot datar dicari dengan menghitung limit $f(x)$ saat $x$ menuju tak hingga ($\infty$):</p>
-                        $$ \lim_{x \to \infty} \frac{6x^2 + 5x - 1}{2x^2 - 3} $$
-                        <p>Karena derajat pangkat tertinggi pada pembilang dan penyebut sama (yaitu $x^2$), kita cukup membagi koefisien utamanya:</p>
-                        $$ y = \frac{6}{2} = 3 $$
-                        <p>Jadi, asimtot datarnya adalah garis $y = 3$.</p>
-                    </div>
-                </details>
+                <div class="soal-item">
+                    <p><strong>Soal 1:</strong> Hitung $ \lim_{x \to 2} (x^2 + 3x - 4) $</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Substitusi langsung: $ 2^2 + 3(2) - 4 = 4 + 6 - 4 = 6 $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 2:</strong> Evaluasi $ \lim_{x \to 3} \frac{x^2 - 9}{x - 3} $</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Faktorkan pembilang: $ \lim_{x \to 3} \frac{(x-3)(x+3)}{x-3} = \lim_{x \to 3} (x+3) = 6 $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 3:</strong> Hitung $ \lim_{x \to \infty} \frac{4x^3 - 2x + 1}{2x^3 + 5} $</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Bagi dengan pangkat tertinggi $x^3$: $ \lim_{x \to \infty} \frac{4 - 2/x^2 + 1/x^3}{2 + 5/x^3} = \frac{4}{2} = 2 $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 4:</strong> Evaluasi $ \lim_{x \to 0} \frac{\sin 3x}{x} $</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Gunakan identitas limit trigonometri dasar: $ \lim_{x \to 0} \frac{\sin ax}{bx} = \frac{a}{b} $. Maka hasilnya adalah $3$.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 5:</strong> Hitung $ \lim_{x \to 4} \frac{\sqrt{x} - 2}{x - 4} $</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Kalikan akar sekawan: $ \lim_{x \to 4} \frac{\sqrt{x} - 2}{x - 4} \cdot \frac{\sqrt{x} + 2}{\sqrt{x} + 2} = \lim_{x \to 4} \frac{x - 4}{(x-4)(\sqrt{x} + 2)} = \frac{1}{\sqrt{4}+2} = \frac{1}{4} $.</div></details>
+                </div>
             </div>
         </section>
 
-        <!-- ==================== KONTEN TURUNAN ==================== -->
+        <!-- ==================== 2. APLIKASI LIMIT ==================== -->
+        <section id="app-limit" class="tab-content">
+            <h2>Bab 2: Aplikasi Limit</h2>
+            <p>Limit digunakan untuk menguji kontinuitas fungsi dan mencari asimtot (garis batas perilaku kurva di tak hingga atau titik singular).</p>
+            
+            <div class="exercise-box">
+                <h3>Contoh Soal & Pembahasan Aplikasi Limit</h3>
+                
+                <div class="soal-item">
+                    <p><strong>Soal 1:</strong> Tentukan asimtot datar dari $ f(x) = \frac{3x - 1}{x + 2} $</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Hitung limit tak hingga: $ \lim_{x \to \infty} \frac{3x - 1}{x + 2} = 3 $. Asimtot datar $y = 3$.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 2:</strong> Tentukan asimtot tegak dari $ f(x) = \frac{5}{x - 4} $</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Asimtot tegak terjadi saat penyebut nol. $x - 4 = 0 \implies x = 4$. Cek limit $x \to 4^+$, hasilnya $\infty$. Asimtot tegak $x = 4$.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 3:</strong> Apakah $ f(x) = \begin{cases} x^2, & x < 2 \\ 2x, & x \geq 2 \end{cases} $ kontinu di $ x = 2 $?</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Limit kiri: $2^2 = 4$. Limit kanan: $2(2) = 4$. Nilai fungsi: $f(2) = 4$. Karena ketiganya sama, fungsi kontinu di $x=2$.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 4:</strong> Tentukan laju perubahan sesaat $f(x)=x^2$ pada $x=3$ menggunakan limit.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">$ \lim_{h \to 0} \frac{f(3+h) - f(3)}{h} = \lim_{h \to 0} \frac{(3+h)^2 - 9}{h} = \lim_{h \to 0} \frac{9+6h+h^2-9}{h} = \lim_{h \to 0} (6+h) = 6 $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 5:</strong> Jika $ 1 - \frac{x^2}{4} \leq u(x) \leq 1 + \frac{x^2}{2} $, tentukan $ \lim_{x \to 0} u(x) $.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Gunakan Teorema Apit (Squeeze Theorem). Limit batas bawah $\to 1$, limit batas atas $\to 1$. Maka $ \lim_{x \to 0} u(x) = 1 $.</div></details>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 3. TURUNAN ==================== -->
         <section id="turunan" class="tab-content">
-            <h2>Konsep Dasar Turunan</h2>
-            <p>Turunan mengukur laju perubahan sesaat dan merepresentasikan gradien garis singgung kurva.</p>
-            <div class="formula-box">
-                $$ f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} $$
-            </div>
-
-            <!-- SUB-BAB APLIKASI TURUNAN -->
-            <h3>Aplikasi Turunan</h3>
-            <div class="app-box">
-                <p><strong>1. Masalah Optimasi (Maksimum & Minimum):</strong> Turunan digunakan untuk mencari nilai ekstrem suatu fungsi (seperti keuntungan maksimal atau biaya minimal). Titik stasioner (kritis) terjadi ketika $f'(x) = 0$. Uji turunan kedua $f''(x)$ digunakan untuk menentukan apakah titik tersebut maksimum (jika $f''(x) < 0$) atau minimum (jika $f''(x) > 0$).</p>
-                <p><strong>2. Kecepatan dan Percepatan (Kinematika):</strong> Jika $s(t)$ adalah fungsi posisi benda terhadap waktu, maka turunan pertamanya adalah fungsi kecepatan sesaat $v(t) = s'(t)$, dan turunan keduanya adalah fungsi percepatan $a(t) = v'(t) = s''(t)$.</p>
-                <p><strong>3. Aturan L'Hôpital:</strong> Membantu menyelesaikan limit bentuk tak tentu $\frac{0}{0}$ atau $\frac{\infty}{\infty}$ dengan cara menurunkan pembilang dan penyebutnya: $\lim \frac{f(x)}{g(x)} = \lim \frac{f'(x)}{g'(x)}$.</p>
-            </div>
-
+            <h2>Bab 3: Turunan (Derivatif)</h2>
+            <div class="formula-box">$$ f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} $$</div>
+            
             <div class="exercise-box">
-                <h3>Latihan Mandiri: Turunan & Aplikasinya</h3>
+                <h3>Contoh Soal & Pembahasan Turunan</h3>
                 
-                <p><strong>Soal 1:</strong> Tentukan turunan dari $f(x) = (3x^2 + 2)^4$.</p>
-                <details>
-                    <summary>Lihat Pembahasan Soal 1</summary>
-                    <div class="solution">
-                        <p>Gunakan <strong>Aturan Rantai</strong>:</p>
-                        $$ f'(x) = 4(3x^2 + 2)^3 \cdot \frac{d}{dx}(3x^2 + 2) $$
-                        $$ f'(x) = 4(3x^2 + 2)^3 \cdot (6x) = 24x(3x^2 + 2)^3 $$
-                    </div>
-                </details>
-
-                <p><strong>Soal 2 (Aplikasi - Optimasi):</strong> Sebuah persegi panjang memiliki keliling 40 cm. Tentukan ukuran panjang dan lebar agar luas persegi panjang tersebut maksimum!</p>
-                <details>
-                    <summary>Lihat Pembahasan Soal 2</summary>
-                    <div class="solution">
-                        <p>Diketahui Keliling $K = 2(p + l) = 40 \implies p + l = 20 \implies l = 20 - p$.</p>
-                        <p>Fungsi Luas: $L(p) = p \times l = p(20 - p) = 20p - p^2$.</p>
-                        <p>Agar luas maksimum, turunan pertama fungsi luas harus sama dengan nol ($L'(p) = 0$):</p>
-                        $$ L'(p) = 20 - 2p = 0 $$
-                        $$ 2p = 20 \implies p = 10 \text{ cm} $$
-                        <p>Jika $p = 10$, maka $l = 20 - 10 = 10 \text{ cm}$. Ukuran yang memberikan luas maksimum adalah bujur sangkar dengan sisi 10 cm.</p>
-                    </div>
-                </details>
+                <div class="soal-item">
+                    <p><strong>Soal 1:</strong> Tentukan turunan pertama dari $ y = 5x^4 - 3x^2 + x - 7 $</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Gunakan aturan pangkat: $ y' = 20x^3 - 6x + 1 $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 2:</strong> Cari $ f'(x) $ jika $ f(x) = x^2 \sin x $</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Aturan perkalian ($u'v + uv'$): $ f'(x) = 2x \sin x + x^2 \cos x $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 3:</strong> Tentukan turunan $ y = \frac{x + 1}{x - 1} $</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Aturan pembagian: $ y' = \frac{(1)(x-1) - (x+1)(1)}{(x-1)^2} = \frac{-2}{(x-1)^2} $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 4:</strong> Turunkan fungsi $ y = \cos(x^3) $</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Aturan rantai: $ y' = -\sin(x^3) \cdot 3x^2 = -3x^2 \sin(x^3) $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 5:</strong> Jika $ y = (2x - 5)^4 $, tentukan $ y' $.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Aturan rantai: $ y' = 4(2x-5)^3 \cdot 2 = 8(2x-5)^3 $.</div></details>
+                </div>
             </div>
         </section>
 
-        <!-- ==================== KONTEN INTEGRAL ==================== -->
-        <section id="integral" class="tab-content">
-            <h2>Konsep Dasar Integral</h2>
-            <p>Integral adalah operasi akumulasi atau kebalikan dari turunan. Teorema Dasar Kalkulus menjembatani integral tentu dengan anti-turunan:</p>
-            <div class="formula-box">
-                $$ \int_{a}^{b} f(x) dx = F(b) - F(a) $$
-            </div>
-
-            <!-- SUB-BAB APLIKASI INTEGRAL -->
-            <h3>Aplikasi Integral</h3>
-            <div class="app-box">
-                <p><strong>1. Luas Daerah Antara Dua Kurva:</strong> Integral tentu dapat digunakan untuk menghitung luas area yang terkurung di antara dua fungsi matematika. Jika kurva $f(x)$ berada di atas kurva $g(x)$ pada interval $[a, b]$, luasnya adalah:</p>
-                $$ L = \int_{a}^{b} [f(x) - g(x)] dx $$
-                <p><strong>2. Volume Benda Putar (Metode Cakram/Cincin):</strong> Apabila suatu luasan diputar 360° mengelilingi sumbu-x atau sumbu-y, maka akan terbentuk bangun ruang 3 dimensi. Integral memungkinkan kita menghitung volumenya. Jika kurva $y = f(x)$ diputar mengelilingi sumbu-x dari batas $a$ hingga $b$, volumenya adalah:</p>
-                $$ V = \pi \int_{a}^{b} [f(x)]^2 dx $$
-            </div>
-
+        <!-- ==================== 4. APLIKASI TURUNAN ==================== -->
+        <section id="app-turunan" class="tab-content">
+            <h2>Bab 4: Aplikasi Turunan</h2>
+            <p>Meliputi perhitungan gradien garis singgung, nilai maksimum/minimum, dan Dalil L'Hôpital.</p>
+            
             <div class="exercise-box">
-                <h3>Latihan Mandiri: Integral & Aplikasinya</h3>
+                <h3>Contoh Soal & Pembahasan Aplikasi Turunan</h3>
                 
-                <p><strong>Soal 1:</strong> Selesaikan $\int (6x^2 - 4x + 1) dx$.</p>
-                <details>
-                    <summary>Lihat Pembahasan Soal 1</summary>
-                    <div class="solution">
-                        $$ \int (6x^2 - 4x + 1) dx = \frac{6}{3}x^3 - \frac{4}{2}x^2 + x + C = 2x^3 - 2x^2 + x + C $$
-                    </div>
-                </details>
+                <div class="soal-item">
+                    <p><strong>Soal 1:</strong> Tentukan gradien garis singgung kurva $ y = x^2 - 4x $ di absis $ x = 3 $.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Turunan $ y' = 2x - 4 $. Substitusi $ x = 3 \implies m = 2(3) - 4 = 2 $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 2 (L'Hôpital):</strong> Hitung $ \lim_{x \to 0} \frac{e^x - 1}{x} $.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Bentuk 0/0. Turunkan pembilang dan penyebut: $ \lim_{x \to 0} \frac{e^x}{1} = e^0 = 1 $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 3 (Optimasi):</strong> Cari nilai minimum fungsi $ f(x) = x^2 - 6x + 8 $.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">$ f'(x) = 2x - 6 = 0 \implies x = 3 $. Nilai minimum: $ f(3) = 3^2 - 6(3) + 8 = -1 $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 4 (Kinematika):</strong> Posisi benda $ s(t) = t^3 - 6t^2 $. Kapan kecepatannya nol?</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Kecepatan $ v(t) = s'(t) = 3t^2 - 12t $. Jika $ v = 0 \implies 3t(t - 4) = 0 $. Waktu saat $ t = 0 $ atau $ t = 4 $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 5:</strong> Tentukan interval fungsi $ f(x) = x^3 - 3x $ naik.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Fungsi naik jika $ f'(x) > 0 \implies 3x^2 - 3 > 0 \implies x^2 > 1 $. Interval: $ x < -1 $ atau $ x > 1 $.</div></details>
+                </div>
+            </div>
+        </section>
 
-                <p><strong>Soal 2 (Aplikasi - Volume Benda Putar):</strong> Tentukan volume benda putar yang terjadi jika daerah yang dibatasi oleh kurva $y = \sqrt{x}$, sumbu-x, dan garis $x = 4$ diputar mengelilingi sumbu-x sejauh 360°.</p>
-                <details>
-                    <summary>Lihat Pembahasan Soal 2</summary>
-                    <div class="solution">
-                        <p>Gunakan rumus volume benda putar mengelilingi sumbu-x:</p>
-                        $$ V = \pi \int_{a}^{b} [f(x)]^2 dx $$
-                        <p>Substitusikan batas $a=0$, $b=4$, dan fungsi $f(x) = \sqrt{x}$:</p>
-                        $$ V = \pi \int_{0}^{4} (\sqrt{x})^2 dx = \pi \int_{0}^{4} x \ dx $$
-                        $$ V = \pi \left[ \frac{1}{2}x^2 \right]_{0}^{4} = \pi \left( \frac{1}{2}(4)^2 - \frac{1}{2}(0)^2 \right) $$
-                        $$ V = \pi \left( \frac{16}{2} - 0 \right) = 8\pi \text{ satuan volume} $$
-                    </div>
-                </details>
+        <!-- ==================== 5. INTEGRAL ==================== -->
+        <section id="integral" class="tab-content">
+            <h2>Bab 5: Integral</h2>
+            <div class="formula-box">$$ \int_{a}^{b} f(x) dx = F(b) - F(a) $$</div>
+            
+            <div class="exercise-box">
+                <h3>Contoh Soal & Pembahasan Integral</h3>
+                
+                <div class="soal-item">
+                    <p><strong>Soal 1:</strong> Hitung $ \int (4x^3 + 6x) dx $.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">$ = x^4 + 3x^2 + C $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 2:</strong> Evaluasi integral tentu $ \int_{1}^{2} 3x^2 dx $.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">$ [x^3]_{1}^{2} = 2^3 - 1^3 = 8 - 1 = 7 $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 3:</strong> Selesaikan dengan substitusi $ \int 2x(x^2+1)^3 dx $.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Misal $ u = x^2+1, du = 2x dx $. $ \int u^3 du = \frac{1}{4}u^4 + C = \frac{1}{4}(x^2+1)^4 + C $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 4:</strong> Hitung $ \int \sin(2x) dx $.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">$ = -\frac{1}{2} \cos(2x) + C $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 5:</strong> Selesaikan $ \int \frac{1}{x} dx $.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">$ = \ln|x| + C $.</div></details>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 6. APLIKASI INTEGRAL ==================== -->
+        <section id="app-integral" class="tab-content">
+            <h2>Bab 6: Aplikasi Integral</h2>
+            <p>Berfokus pada perhitungan Luas Daerah antar kurva dan Volume Benda Putar.</p>
+            
+            <div class="exercise-box">
+                <h3>Contoh Soal & Pembahasan Aplikasi Integral</h3>
+                
+                <div class="soal-item">
+                    <p><strong>Soal 1:</strong> Luas daerah antara $ y = 2x $, sumbu-x, dari $ x=0 $ ke $ x=3 $.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">$ L = \int_{0}^{3} 2x dx = [x^2]_{0}^{3} = 9 - 0 = 9 $ satuan luas.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 2:</strong> Luas antara kurva $ y=x^2 $ dan $ y=x $.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Titik potong: $ x^2=x \implies x=0, 1 $. <br> $ L = \int_{0}^{1} (x - x^2) dx = [\frac{1}{2}x^2 - \frac{1}{3}x^3]_0^1 = \frac{1}{2} - \frac{1}{3} = \frac{1}{6} $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 3 (Volume):</strong> Volume $ y = \sqrt{x} $ diputar 360° pada sumbu-x ( $ 0 \leq x \leq 4 $ ).</p>
+                    <details><summary>Pembahasan</summary><div class="solution">$ V = \pi \int_{0}^{4} (\sqrt{x})^2 dx = \pi \int_{0}^{4} x dx = \pi [\frac{1}{2}x^2]_0^4 = 8\pi $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 4 (Volume):</strong> Volume $ y=x^2 $ mengelilingi sumbu-y, $ y $ dari 0 sampai 4.</p>
+                    <details><summary>Pembahasan</summary><div class="solution">Fungsi dalam $y$: $ x = \sqrt{y} $. $ V = \pi \int_{0}^{4} (\sqrt{y})^2 dy = \pi [\frac{1}{2}y^2]_0^4 = 8\pi $.</div></details>
+                </div>
+                <div class="soal-item">
+                    <p><strong>Soal 5:</strong> Nilai rata-rata fungsi $ f(x) = x^2 $ pada interval [0, 3].</p>
+                    <details><summary>Pembahasan</summary><div class="solution">$ f_{avg} = \frac{1}{b-a} \int_{a}^{b} f(x) dx = \frac{1}{3} \int_{0}^{3} x^2 dx = \frac{1}{3} [\frac{1}{3}x^3]_0^3 = \frac{1}{3}(9) = 3 $.</div></details>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 7. BANK SOAL ==================== -->
+        <section id="bank-soal" class="tab-content">
+            <h2>Bab 7: Bank Soal Kalkulus Dasar</h2>
+            <p>Kumpulan 30 soal komprehensif untuk menguji pemahaman Anda secara keseluruhan.</p>
+            
+            <div class="bank-soal-box">
+                <!-- Limit (1-10) -->
+                <div class="soal-item"><p><strong>1.</strong> $ \lim_{x \to -2} (4x - 5) $</p><details><summary>Solusi</summary><div class="solution">Substitusi: $ 4(-2) - 5 = -13 $</div></details></div>
+                <div class="soal-item"><p><strong>2.</strong> $ \lim_{x \to 5} \frac{x^2 - 25}{x - 5} $</p><details><summary>Solusi</summary><div class="solution">Pemfaktoran: $ \lim (x+5) = 10 $</div></details></div>
+                <div class="soal-item"><p><strong>3.</strong> $ \lim_{x \to 0} \frac{1 - \cos 2x}{x^2} $</p><details><summary>Solusi</summary><div class="solution">$ 1-\cos 2x = 2\sin^2 x $. Limit = 2.</div></details></div>
+                <div class="soal-item"><p><strong>4.</strong> $ \lim_{x \to \infty} \frac{7x^2}{3x^2 + 2} $</p><details><summary>Solusi</summary><div class="solution">Koefisien tertinggi: $ 7/3 $</div></details></div>
+                <div class="soal-item"><p><strong>5.</strong> $ \lim_{x \to \infty} (\sqrt{x^2+4x} - x) $</p><details><summary>Solusi</summary><div class="solution">Kalikan akar sekawan. Hasil: 2</div></details></div>
+                <div class="soal-item"><p><strong>6.</strong> $ \lim_{x \to 0} \frac{\tan 4x}{\sin 2x} $</p><details><summary>Solusi</summary><div class="solution">Rasio koefisien: $ 4/2 = 2 $</div></details></div>
+                <div class="soal-item"><p><strong>7.</strong> Asimtot tegak $ f(x) = \frac{1}{x^2 - 1} $</p><details><summary>Solusi</summary><div class="solution">Penyebut = 0. $ x = 1 $ dan $ x = -1 $</div></details></div>
+                <div class="soal-item"><p><strong>8.</strong> $ \lim_{x \to 2} \frac{x^3 - 8}{x - 2} $</p><details><summary>Solusi</summary><div class="solution">Faktorkan $(x-2)(x^2+2x+4)$. Hasil: 12</div></details></div>
+                <div class="soal-item"><p><strong>9.</strong> $ \lim_{x \to \infty} \frac{x}{e^x} $</p><details><summary>Solusi</summary><div class="solution">L'Hopital: $ \lim \frac{1}{e^x} = 0 $</div></details></div>
+                <div class="soal-item"><p><strong>10.</strong> Tentukan jika $f(x)=|x|/x$ punya limit di $x=0$.</p><details><summary>Solusi</summary><div class="solution">Limit kiri -1, limit kanan 1. Tidak ada limit.</div></details></div>
+
+                <!-- Turunan (11-20) -->
+                <div class="soal-item"><p><strong>11.</strong> $ f(x) = \sqrt{x} $. Cari $ f'(x) $.</p><details><summary>Solusi</summary><div class="solution">$ f'(x) = \frac{1}{2\sqrt{x}} $</div></details></div>
+                <div class="soal-item"><p><strong>12.</strong> $ y = x \ln x $. Cari $ y' $.</p><details><summary>Solusi</summary><div class="solution">Perkalian: $ 1 \cdot \ln x + x(1/x) = \ln x + 1 $</div></details></div>
+                <div class="soal-item"><p><strong>13.</strong> $ y = e^{2x} $. Cari $ y' $.</p><details><summary>Solusi</summary><div class="solution">Rantai: $ 2e^{2x} $</div></details></div>
+                <div class="soal-item"><p><strong>14.</strong> Gradien kurva $ y = 1/x $ di $ x = 2 $.</p><details><summary>Solusi</summary><div class="solution">$ y' = -1/x^2 \implies -1/4 $</div></details></div>
+                <div class="soal-item"><p><strong>15.</strong> $ f(x) = \tan x $. Cari $ f''(x) $.</p><details><summary>Solusi</summary><div class="solution">$ f'(x) = \sec^2 x \implies f''(x) = 2\sec^2 x \tan x $</div></details></div>
+                <div class="soal-item"><p><strong>16.</strong> Titik belok fungsi $ f(x) = x^3 $. </p><details><summary>Solusi</summary><div class="solution">$ f''(x) = 6x = 0 $. Titik belok di $ x = 0 $.</div></details></div>
+                <div class="soal-item"><p><strong>17.</strong> L'Hopital: $ \lim_{x \to 0} \frac{\sin x - x}{x^3} $</p><details><summary>Solusi</summary><div class="solution">Turunkan 3x. Hasil: $-1/6$.</div></details></div>
+                <div class="soal-item"><p><strong>18.</strong> $ f(x) = \frac{x}{x+1} $. Cari $ f'(1) $.</p><details><summary>Solusi</summary><div class="solution">$ f'(x) = \frac{1}{(x+1)^2} \implies f'(1) = 1/4 $</div></details></div>
+                <div class="soal-item"><p><strong>19.</strong> Turunan implisit $ x^2 + y^2 = 25 $. Cari $ y' $.</p><details><summary>Solusi</summary><div class="solution">$ 2x + 2yy' = 0 \implies y' = -x/y $</div></details></div>
+                <div class="soal-item"><p><strong>20.</strong> Sebuah balon sferis mengembang, laju volume 10. Cari laju jari-jari saat $ r=5 $.</p><details><summary>Solusi</summary><div class="solution">$ V = \frac{4}{3}\pi r^3 \implies \frac{dV}{dt} = 4\pi r^2 \frac{dr}{dt} \implies 10 = 100\pi \frac{dr}{dt} \implies \frac{1}{10\pi} $</div></details></div>
+
+                <!-- Integral (21-30) -->
+                <div class="soal-item"><p><strong>21.</strong> $ \int e^x dx $</p><details><summary>Solusi</summary><div class="solution">$ = e^x + C $</div></details></div>
+                <div class="soal-item"><p><strong>22.</strong> $ \int_{0}^{\pi} \cos x dx $</p><details><summary>Solusi</summary><div class="solution">$ [\sin x]_0^\pi = 0 - 0 = 0 $</div></details></div>
+                <div class="soal-item"><p><strong>23.</strong> $ \int x \sqrt{x^2 + 1} dx $</p><details><summary>Solusi</summary><div class="solution">Substitusi $ u = x^2+1 $. Hasil: $ \frac{1}{3}(x^2+1)^{3/2} + C $</div></details></div>
+                <div class="soal-item"><p><strong>24.</strong> $ \int \frac{2x}{x^2+5} dx $</p><details><summary>Solusi</summary><div class="solution">$ = \ln(x^2+5) + C $</div></details></div>
+                <div class="soal-item"><p><strong>25.</strong> $ \int x e^x dx $ (Parsial)</p><details><summary>Solusi</summary><div class="solution">$ = x e^x - e^x + C $</div></details></div>
+                <div class="soal-item"><p><strong>26.</strong> Luas daerah $ y = x^3 $ dari $ x=0 $ ke $ x=2 $.</p><details><summary>Solusi</summary><div class="solution">$ \int_0^2 x^3 dx = [\frac{1}{4}x^4]_0^2 = 4 $</div></details></div>
+                <div class="soal-item"><p><strong>27.</strong> Integral $ \int \tan x dx $</p><details><summary>Solusi</summary><div class="solution">$ = -\ln|\cos x| + C $</div></details></div>
+                <div class="soal-item"><p><strong>28.</strong> Volume kerucut jari $ r $, tinggi $ h $ diputar dari garis $ y = (r/h)x $.</p><details><summary>Solusi</summary><div class="solution">$ \pi \int_0^h (r/h \cdot x)^2 dx = \frac{1}{3}\pi r^2 h $</div></details></div>
+                <div class="soal-item"><p><strong>29.</strong> $ \int_{0}^{1} \frac{1}{1+x^2} dx $</p><details><summary>Solusi</summary><div class="solution">$ [\arctan x]_0^1 = \pi/4 $</div></details></div>
+                <div class="soal-item"><p><strong>30.</strong> $ \int \ln x dx $</p><details><summary>Solusi</summary><div class="solution">Parsial: $ = x \ln x - x + C $</div></details></div>
             </div>
         </section>
     </main>
 
-    <!-- JavaScript: Logika Navigasi Tab -->
     <script>
         function openTab(evt, tabName) {
             const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => {
-                content.classList.remove('active');
-            });
+            contents.forEach(content => content.classList.remove('active'));
 
             const buttons = document.querySelectorAll('.tab-link');
-            buttons.forEach(button => {
-                button.classList.remove('active');
-            });
+            buttons.forEach(button => button.classList.remove('active'));
 
             document.getElementById(tabName).classList.add('active');
             evt.currentTarget.classList.add('active');
