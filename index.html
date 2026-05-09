@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Dasar Kalkulus</title>
+    <style>
+        /* CSS: Desain dan Tata Letak */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #34495e;
+        }
+        nav button {
+            background: none;
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+        nav button:hover, nav button.active {
+            background-color: #2980b9;
+        }
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        .formula-box {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-left: 4px solid #3498db;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 1.2rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Portal Pembelajaran Kalkulus Dasar</h1>
+        <p>Memahami Limit, Turunan, dan Integral secara Intuitif</p>
+    </header>
+
+    <nav>
+        <button class="tab-link active" onclick="openTab('limit')">Limit</button>
+        <button class="tab-link" onclick="openTab('turunan')">Turunan</button>
+        <button class="tab-link" onclick="openTab('integral')">Integral</button>
+    </nav>
+
+    <main>
+        <!-- Konten Limit -->
+        <section id="limit" class="tab-content active">
+            <h2>Konsep Limit</h2>
+            <p>Limit menjelaskan nilai yang dihampiri oleh suatu fungsi ketika variabel inputnya mendekati suatu nilai tertentu. Ini adalah fondasi dari seluruh kalkulus.</p>
+            <div class="formula-box">
+                lim (x → c) f(x) = L
+            </div>
+            <p>Bisa dibaca sebagai: "Limit dari fungsi f(x) saat x mendekati c adalah L." Konsep ini sangat penting untuk mendefinisikan kontinuitas dan turunan.</p>
+        </section>
+
+        <!-- Konten Turunan -->
+        <section id="turunan" class="tab-content">
+            <h2>Turunan (Derivatif)</h2>
+            <p>Turunan mengukur seberapa cepat nilai fungsi berubah terhadap perubahan variabel input. Secara geometris, turunan pada suatu titik mewakili gradien (kemiringan) dari garis singgung kurva di titik tersebut.</p>
+            <div class="formula-box">
+                f'(x) = lim (h → 0) [f(x + h) - f(x)] / h
+            </div>
+            <p>Turunan banyak digunakan untuk mencari nilai maksimum, minimum, dan laju perubahan sesaat dalam fisika maupun ekonomi.</p>
+        </section>
+
+        <!-- Konten Integral -->
+        <section id="integral" class="tab-content">
+            <h2>Integral</h2>
+            <p>Integral adalah kebalikan dari turunan (anti-turunan) dan sering digunakan untuk menghitung luas area di bawah sebuah kurva pada grafik koordinat.</p>
+            <div class="formula-box">
+                ∫ f(x) dx = F(x) + C
+            </div>
+            <p>Integral Tentu digunakan untuk menghitung luas area yang dibatasi oleh interval [a, b], yang merupakan pilar penting dalam menyelesaikan persoalan terkait akumulasi suatu kuantitas.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Materi Kalkulus. Dibuat dengan HTML, CSS, & JS.</p>
+    </footer>
+
+    <!-- JavaScript: Logika Navigasi Tab -->
+    <script>
+        function openTab(tabName) {
+            // Sembunyikan semua tab content
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Hilangkan status aktif dari semua tombol
+            const buttons = document.querySelectorAll('.tab-link');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Tampilkan tab yang dipilih
+            document.getElementById(tabName).classList.add('active');
+            
+            // Tandai tombol yang diklik sebagai aktif
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
