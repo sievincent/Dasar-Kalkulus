@@ -67,10 +67,30 @@
             display: block;
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; margin-top: 1rem; }
-        h3 { color: #2980b9; margin-top: 2rem; border-left: 4px solid #2980b9; padding-left: 0.8rem; }
-        h4 { color: #d35400; margin-top: 1.5rem; }
+        h2 { 
+            color: #2c3e50; 
+            border-bottom: 2px solid #eee; 
+            padding-bottom: 0.5rem; 
+            margin-top: 1rem; 
+            text-align: center; /* Membuat Judul Bab ke tengah */
+        }
+        h3 { 
+            color: #2980b9; 
+            margin-top: 2rem; 
+            text-align: center; /* Membuat Sub-bab ke tengah */
+            /* Garis biru di kiri saya ubah ke bawah agar lebih rapi saat teks di tengah */
+            border-bottom: 1px dashed #2980b9; 
+            padding-bottom: 0.5rem; 
+        }
+        h4 { 
+            color: #d35400; 
+            margin-top: 1.5rem; 
+            text-align: center; /* Membuat Sub-sub-bab ke tengah */
+        }
         p, li { text-align: justify; }
+        header p { 
+            text-align: center; /* Mengembalikan deskripsi di header biru agar kembali ke tengah */
+        }
         .formula-box { background-color: #e8f4f8; padding: 1.5rem; border-left: 4px solid #3498db; margin: 1.5rem 0; overflow-x: auto; font-size: 1.1rem; }
         .theory-box { background-color: #fdfefe; padding: 1.5rem; border: 1px solid #e5e8e8; border-radius: 5px; margin-bottom: 1.5rem; }
         .exercise-box { background-color: #fff9e6; padding: 2rem; border: 1px solid #f1c40f; border-radius: 5px; margin-top: 2rem; }
